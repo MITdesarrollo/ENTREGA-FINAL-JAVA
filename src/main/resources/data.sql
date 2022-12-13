@@ -1,4 +1,2 @@
-INSERT INTO Cliente (nombre, apellido, dni) values
-('Juan', 'Perez', 5555),
-('Jaime', 'Lopez', 5777),
-('Jose', 'Gomez', 8888)
+INSERT INTO CLIENTE (id, nombre, apellido , dni) VALUES
+(1, "lolo", "lopez", 4567);

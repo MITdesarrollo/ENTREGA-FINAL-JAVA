@@ -1,28 +1,18 @@
 package com.facturacion.torres.entidades;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table (name = "cliente")
 public class Cliente {
 
-    public Cliente() {
-
-    }
-
-    public Cliente(int id_cliente, String nombre, String apellido, long dni) {
-        this.id = id_cliente;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-    }
-
     @Id
-    @GeneratedValue
-    @Column(name = "cliente_id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "nombre")
     private String nombre;
@@ -33,13 +23,33 @@ public class Cliente {
     @Column(name = "dni")
     private long dni;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "cliente123", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Comprobante>comprobante;
 
-    public int getId_cliente() {
+
+    public Cliente() {
+
+    }
+    public Cliente(long id, String nombre, String apellido, long dni) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+    }
+
+    public Cliente(String nombre, String apellido, long dni) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId_cliente(int id_cliente) {
-        this.id = id_cliente;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -65,7 +75,6 @@ public class Cliente {
     public void setDni(long dni) {
         this.dni = dni;
     }
-
 
     @Override
     public boolean equals(Object o) {

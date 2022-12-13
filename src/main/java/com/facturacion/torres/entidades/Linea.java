@@ -1,6 +1,7 @@
 package com.facturacion.torres.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -9,22 +10,9 @@ import java.util.Objects;
 @Table(name = "linea")
 public class Linea {
 
-    public Linea() {
-    }
-
-    public Linea(int id, String descripcion, int cantidad, float precio, Comprobante comprobante, Producto producto) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.comprobante = comprobante;
-        this.producto = producto;
-    }
-
     @Id
-    @GeneratedValue
-    @Column(name = "linea_id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "descripcion")
     private String descripcion;
@@ -35,22 +23,38 @@ public class Linea {
     @Column(name = "precio")
     private float precio;
 
-    //QUISIERA SABER SI ESTA BIEN ESTAS UNIONES
 
-    @ManyToOne
-    @JoinColumn(name = "comprobante_id")
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private Comprobante comprobante;
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private Producto  producto;
 
+    public Linea() {
+    }
+    public Linea(long id, String descripcion, int cantidad, float precio, Comprobante comprobante, Producto producto) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.comprobante = comprobante;
+        this.producto = producto;
+    }
 
-    public int getId() {
+    public Linea(String descripcion, int cantidad, float precio, Comprobante comprobante, Producto producto) {
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.comprobante = comprobante;
+        this.producto = producto;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -93,7 +97,6 @@ public class Linea {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-
 
     @Override
     public boolean equals(Object o) {
