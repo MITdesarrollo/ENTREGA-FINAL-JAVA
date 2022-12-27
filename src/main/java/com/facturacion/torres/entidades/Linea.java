@@ -24,10 +24,10 @@ public class Linea {
     private float precio;
 
 
-    @JsonBackReference
+    @JsonBackReference(value = "linea")
     @ManyToOne(fetch = FetchType.EAGER)
     private Comprobante comprobante;
-    @JsonBackReference
+    @JsonBackReference(value = "producto")
     @ManyToOne(fetch = FetchType.EAGER)
     private Producto  producto;
 

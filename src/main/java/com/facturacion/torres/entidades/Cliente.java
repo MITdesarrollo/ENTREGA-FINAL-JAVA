@@ -23,7 +23,7 @@ public class Cliente {
     @Column(name = "dni")
     private long dni;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "cliente")
     @OneToMany(mappedBy = "cliente123", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comprobante>comprobante;
 

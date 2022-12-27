@@ -1,6 +1,8 @@
 package com.facturacion.torres.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class Producto {
     @Column(name = "precio")
     private float precio;
 
+    @JsonManagedReference(value = "producto")
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Linea> linea;
 

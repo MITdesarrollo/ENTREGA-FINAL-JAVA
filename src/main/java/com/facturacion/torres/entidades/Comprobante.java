@@ -25,11 +25,11 @@ public class Comprobante {
     @Column(name = "total")
     private float total;
 
-    @JsonBackReference
+    @JsonBackReference(value = "cliente")
     @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente123;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "linea")
     @OneToMany(mappedBy = "comprobante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Linea> linea;
 
