@@ -1,128 +1,107 @@
 package com.facturacion.torres.entidades;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-@Table(name="producto")
+@Table(name = "producto")
 public class Producto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "ID")
+   private  Long id;
 
-    @Column(name = "codigo")
-    private int codigo;
+   @Column(name = "CODE")
+   private  Integer productCode;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+   @Column(name = "DESCRIPTION")
+   private  String description;
 
-    @Column(name = "cantidad")
-    private int cantidad;
+   @Column(name = "QUANTITY")
+   private  Integer quantity;
 
-    @Column(name = "precio")
-    private float precio;
+   @Column(name = "PRICE")
+   private Float price;
 
-    @JsonManagedReference(value = "producto")
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Linea> linea;
+   @JsonManagedReference
+   @JsonIgnore
+   @OneToMany(mappedBy = "producto")
+   private List<LineaProduct> linea;
 
-    public Producto() {
 
-    }
+   public Producto() {
+   }
 
-    public Producto(long id, int codigo, String descripcion, int cantidad, float precio, List<Linea> linea) {
-        this.id = id;
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.linea = linea;
-    }
+   public Producto(Integer productCode, String description, Integer quantity, Float price) {
+      this.productCode = productCode;
+      this.description = description;
+      this.quantity = quantity;
+      this.price = price;
+   }
 
-    public Producto(int codigo, String descripcion, int cantidad, float precio, List<Linea> linea) {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.linea = linea;
-    }
+   // GETTERS & SETTERS
 
-    public long getId() {
-        return id;
-    }
+   public Long getProductId() {
+      return id;
+   }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+   public void setProductId(Long id) {
+      this.id = id;
+   }
 
-    public int getCodigo() {
-        return codigo;
-    }
+   public Integer getProductCode() {
+      return productCode;
+   }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+   public void setProductCode(Integer productCode) {
+      this.productCode = productCode;
+   }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+   public String getDescription() {
+      return description;
+   }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+   public void setDescription(String description) {
+      this.description = description;
+   }
 
-    public int getCantidad() {
-        return cantidad;
-    }
+   public Integer getQuantity() {
+      return quantity;
+   }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+   public void setQuantity(Integer quantity) {
+      this.quantity = quantity;
+   }
 
-    public float getPrecio() {
-        return precio;
-    }
+   public Float getPrice() {
+      return price;
+   }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
+   public void setPrice(Float price) {
+      this.price = price;
+   }
 
-    public List<Linea> getLinea() {
-        return linea;
-    }
+   public List<LineaProduct> getLina() {
+      return linea;
+   }
 
-    public void setLinea(List<Linea> linea) {
-        this.linea = linea;
-    }
+   public void setLines(List<LineaProduct> linea) {
+      this.linea = linea;
+   }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Producto producto = (Producto) o;
-        return id == producto.id && codigo == producto.codigo && cantidad == producto.cantidad && Float.compare(producto.precio, precio) == 0 && Objects.equals(descripcion, producto.descripcion) && Objects.equals(linea, producto.linea);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, codigo, descripcion, cantidad, precio, linea);
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "id=" + id +
-                ", codigo=" + codigo +
-                ", descripcion='" + descripcion + '\'' +
-                ", cantidad=" + cantidad +
-                ", precio=" + precio +
-                ", linea=" + linea +
-                '}';
-    }
+   @Override
+   public String toString() {
+      return "Product{" +
+              "productId=" + id +
+              ", productCode=" + productCode +
+              ", description='" + description + '\'' +
+              ", quantity=" + quantity +
+              ", price=" + price +
+              '}';
+   }
 }

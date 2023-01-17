@@ -1,128 +1,105 @@
 package com.facturacion.torres.entidades;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.sql.Date;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "comprobante")
 public class Comprobante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "ID")
+    private  Long id;
 
-    @Column(name = "fecha")
-    private Date fecha;
+    @Column(name = "DATE")
+    private  LocalDate date;
 
-    @Column(name = "cantidad")
-    private int cantidad;
+    @Column(name = "QUANTITY")
+    private  Integer quantity;
 
-    @Column(name = "total")
-    private float total;
+    @Column(name = "TOTAL")
+    private Float total;
+
 
     @JsonBackReference(value = "cliente")
     @ManyToOne(fetch = FetchType.EAGER)
-    private Cliente cliente123;
+    private Cliente cliente;
+
 
     @JsonManagedReference(value = "linea")
-    @OneToMany(mappedBy = "comprobante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Linea> linea;
+    @OneToMany(mappedBy = "comprobante",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<LineaProduct> linea;
+
+
 
     public Comprobante() {
     }
 
-    public Comprobante(long id, Date fecha, int cantidad, float total, Cliente cliente, List<Linea> linea) {
-        this.id = id;
-        this.fecha = fecha;
-        this.cantidad = cantidad;
-        this.total = total;
-        this.cliente123 = cliente123;
-        this.linea = linea;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public Comprobante(Date fecha, int cantidad, float total, Cliente cliente, List<Linea> linea) {
-        this.fecha = fecha;
-        this.cantidad = cantidad;
-        this.total = total;
-        this.cliente123 = cliente123;
-        this.linea = linea;
-    }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public float getTotal() {
-        return total;
-    }
-
-    public void setTotal(float total) {
-        this.total = total;
-    }
-
-    public Cliente getCliente() {
-        return cliente123;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente123 = cliente;
-    }
-
-    public List<Linea> getLinea() {
+    public Set<LineaProduct> getLines() {
         return linea;
     }
 
-    public void setLinea(List<Linea> linea) {
-        this.linea = linea;
+    public void setLines(Set<LineaProduct> lines) {
+        this.linea = lines;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comprobante that = (Comprobante) o;
-        return id == that.id && cantidad == that.cantidad && Float.compare(that.total, total) == 0 && Objects.equals(fecha, that.fecha) && Objects.equals(cliente123, that.cliente123) && Objects.equals(linea, that.linea);
+    public Long getReceiptId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, fecha, cantidad, total, cliente123, linea);
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public Cliente getClient() {
+        return cliente;
+    }
+
+    public void setClient(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    public void addLinea(LineaProduct line) {
     }
 
     @Override
     public String toString() {
-        return "Comprobante{" +
-                "id=" + id +
-                ", fecha=" + fecha +
-                ", cantidad=" + cantidad +
+        return "Receipt{" +
+                "receiptId=" + id +
+                ", date=" + date +
+                ", quantity=" + quantity +
                 ", total=" + total +
-                ", cliente=" + cliente123 +
-                ", linea=" + linea +
+                ", client=" + cliente +
+                ", lines=" + linea +
                 '}';
     }
+
+
 }
