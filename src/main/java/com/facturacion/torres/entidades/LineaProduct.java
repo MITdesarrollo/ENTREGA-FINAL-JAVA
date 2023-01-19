@@ -24,13 +24,20 @@ public class LineaProduct {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "LINEA_ID")
+    @JoinColumn(name = "COMPROBANTE_ID")
     Comprobante comprobante;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     Producto producto;
+
+
+
+
+
+
+
 
     public LineaProduct() {
     }

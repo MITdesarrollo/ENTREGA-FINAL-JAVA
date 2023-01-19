@@ -1,10 +1,12 @@
 package com.facturacion.torres.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +15,7 @@ public class Comprobante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "COMPROBANTE_ID")
     private  Long id;
 
     @Column(name = "DATE")
@@ -26,14 +28,14 @@ public class Comprobante {
     private Float total;
 
 
-    @JsonBackReference(value = "cliente")
+    @JsonBackReference(value = "cliente_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente;
 
 
-    @JsonManagedReference(value = "linea")
-    @OneToMany(mappedBy = "comprobante",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<LineaProduct> linea;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "comprobante")
+    private Set<LineaProduct> lineaProducts;
 
 
 
@@ -48,11 +50,11 @@ public class Comprobante {
 
 
     public Set<LineaProduct> getLines() {
-        return linea;
+        return lineaProducts;
     }
 
     public void setLines(Set<LineaProduct> lines) {
-        this.linea = lines;
+        this.lineaProducts = lines;
     }
 
     public Long getReceiptId() {
@@ -97,7 +99,7 @@ public class Comprobante {
                 ", quantity=" + quantity +
                 ", total=" + total +
                 ", client=" + cliente +
-                ", lines=" + linea +
+                ", lines=" + lineaProducts +
                 '}';
     }
 

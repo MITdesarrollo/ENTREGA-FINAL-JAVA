@@ -8,6 +8,7 @@ import com.facturacion.torres.reposiroty.ComprobRepository;
 import com.facturacion.torres.reposiroty.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,6 +26,7 @@ public class ComprobService {
     ProductRepository productRepository;
 
     @Autowired
+
     RestTemplate restTemplate;
 
 
@@ -87,7 +89,7 @@ public class ComprobService {
 
             return createComprobDTO(this.comprobRepository.save(comprobanteToSave));
         } else {
-            return new ComprobanteDTO(); //
+            return new ComprobanteDTO();
         }
     }
 

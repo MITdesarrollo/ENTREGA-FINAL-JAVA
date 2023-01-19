@@ -13,7 +13,7 @@ public class Producto {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "ID")
+   @Column(name = "PRODUCT_ID")
    private  Long id;
 
    @Column(name = "CODE")
@@ -32,6 +32,7 @@ public class Producto {
    @JsonIgnore
    @OneToMany(mappedBy = "producto")
    private List<LineaProduct> linea;
+
 
 
    public Producto() {

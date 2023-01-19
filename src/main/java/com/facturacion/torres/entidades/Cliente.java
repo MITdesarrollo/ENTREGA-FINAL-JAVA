@@ -14,7 +14,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "CLIENTE_ID")
     private  Long id;
 
     @Column(name = "DNI")
@@ -26,7 +26,7 @@ public class Cliente {
     @Column(name = "SURNAME")
     private  String clientSurname;
 
-    @JsonManagedReference(value = "cliente")
+    @JsonManagedReference
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comprobante> comprobantes;
