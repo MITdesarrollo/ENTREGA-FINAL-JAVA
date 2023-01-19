@@ -48,6 +48,7 @@ public class LineaProduct {
         this.price = price;
     }
 
+
     public Long getId() {
         return id;
     }
