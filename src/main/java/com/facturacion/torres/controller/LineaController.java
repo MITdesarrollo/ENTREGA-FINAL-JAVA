@@ -68,7 +68,7 @@ public class LineaController {
         }
     }
 
-    @PostMapping(value = "/agregar/linea")
+    @PostMapping(value = "/agregar")
     public LineaProduct createLineatDTO(@RequestBody LineaProduct linea) {
         return this.lineaService.creaLinea(linea);
     }

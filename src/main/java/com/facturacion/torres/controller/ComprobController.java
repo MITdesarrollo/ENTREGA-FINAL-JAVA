@@ -69,7 +69,7 @@ public class ComprobController {
         }
     }
 
-    @PostMapping(value = "/agregar/comprobante")
+    @PostMapping(value = "/agregar")
     public ComprobanteDTO createComprobtDTO(@RequestBody Comprobante comprobante) {
         return this.comprobService.saveReceipt(comprobante);
     }

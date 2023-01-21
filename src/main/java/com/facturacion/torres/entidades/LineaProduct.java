@@ -9,7 +9,7 @@ public class LineaProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "LINEA_ID")
     private  Long id;
 
     @Column(name = "DESCRIPTION")
